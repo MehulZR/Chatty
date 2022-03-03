@@ -9,7 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.26.0",
+    "cors": "^2.8.5",
     "express": "^4.17.3",
+    "googleapis": "^95.0.0",
+    "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.15"
   },
   "type": "module"
