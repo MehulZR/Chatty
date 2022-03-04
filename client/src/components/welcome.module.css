@@ -1,0 +1,66 @@
+.app {
+  display: flex;
+  height: 90vh;
+  width: 100vw;
+  overflow: auto;
+}
+.appLeftPart {
+  width: 30vw;
+  min-width: 350px;
+  background-color: blue;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 3px solid white;
+}
+.appRightPart {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-width: 600px;
+  height: 100%;
+  background-color: blue;
+}
+.chatList {
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+}
+.chatList > li {
+  padding: 0.5rem;
+  color: white;
+  border-bottom: 1px solid gray;
+}
+.chatList:last-child {
+  border-bottom: none;
+}
+.searchInputContainer {
+  padding: 0.5rem;
+  width: 100%;
+  border-bottom: 1px solid gray;
+}
+.chatInputContainer {
+  padding: 0.5rem;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  border-top: 1px solid gray;
+  display: flex;
+}
+.chatInputContainer input {
+  width: 90%;
+}
+.chatHistory {
+  height: 100%;
+  overflow: auto;
+}
+.chatHistory > li {
+  padding: 0.5rem 1rem;
+  color: white;
+}
+.sendIcon {
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+}
