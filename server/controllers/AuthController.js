@@ -2,6 +2,7 @@ import axios from "axios";
 import jwt from "jsonwebtoken";
 import Users from "../models/Users.js";
 import oauth2Client from "../services/googleApi.js";
+import { jwtSign } from "../services/jwt.js";
 export default {
   login: (req, res) => {
     const scope = "https://www.googleapis.com/auth/userinfo.profile";
@@ -28,9 +29,6 @@ export default {
           id: userinfo.id,
         });
     });
-    jwt.sign(userinfo, process.env.JWT, { expiresIn: "24h" }, (err, token) => {
-      res.cookie("Account-LoggedIn", token);
-      res.redirect("http://localhost:3000");
-    });
+    jwtSign(userinfo, res);
   },
 };
