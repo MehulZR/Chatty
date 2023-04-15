@@ -1,4 +1,4 @@
-import chatImage from "../public/chating.svg";
+import chatImage from "../../public/chating.svg";
 import Image from "next/image";
 export default function ChatImage() {
   return (

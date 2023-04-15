@@ -1,9 +1,9 @@
 import Image from "next/image";
-import userImage from "../public/user.svg";
+import userImage from "../../public/user.svg";
 export default function UserList({
   users,
-  setCurrentChatHelper,
   searchUserLoading,
+  setCurrentChatHelper,
 }) {
   let usersList = Object.values(users);
   let renderHelper = [];

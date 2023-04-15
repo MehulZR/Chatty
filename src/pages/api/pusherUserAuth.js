@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import pusher from "../../config/pusher";
+import pusher from "../../../config/pusher";
 export default async (req, res) => {
   try {
     if (!Object.hasOwnProperty.call(req.cookies, "Authentication"))
@@ -10,6 +10,7 @@ export default async (req, res) => {
       process.env.JWT_PUBLIC_KEY
     );
     const authResponse = pusher.authenticateUser(socket_id, {
+      id: decoded.id,
       user_info: { name: decoded.name },
     });
     res.send(authResponse);

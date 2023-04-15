@@ -1,4 +1,4 @@
-import connectToDatabase from "../../config/mongodb.js";
+import connectToDatabase from "../../../config/mongodb.js";
 import jwt from "jsonwebtoken";
 
 export default async (req, res) => {

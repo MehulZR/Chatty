@@ -1,7 +1,7 @@
 import axios from "axios";
 import jwt from "jsonwebtoken";
-import connectToDatabase from "../../config/mongodb.js";
-import { getToken } from "../../config/oauth.js";
+import connectToDatabase from "../../../config/mongodb.js";
+import { getToken } from "../../../config/oauth.js";
 
 export default async (req, res) => {
   try {

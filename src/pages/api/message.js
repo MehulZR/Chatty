@@ -1,5 +1,5 @@
-import connectToDatabase from "../../config/mongodb.js";
-import pusher from "../../config/pusher.js";
+import connectToDatabase from "../../../config/mongodb.js";
+import pusher from "../../../config/pusher.js";
 import jwt from "jsonwebtoken";
 
 export default async (req, res) => {
@@ -53,17 +53,16 @@ export default async (req, res) => {
         })
       ).acknowledged;
       if (!acknowledged) throw new Error("Database Error");
-      const response = await pusher.trigger(
-        `private-${req.body.receiver_id}`,
-        "message",
-        {
-          sender_id: decoded.id,
-          receiver_id: req.body.receiver_id,
-          msg: req.body.msg,
-          time_stamp: time_stamp,
-        }
-      );
-      console.log(response);
+
+      // Must not run in production
+      if (process.env.NODE_ENV === "development")
+        process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+      await pusher.trigger(`private-${req.body.receiver_id}`, "message", {
+        sender_id: decoded.id,
+        receiver_id: req.body.receiver_id,
+        msg: req.body.msg,
+        time_stamp: time_stamp,
+      });
       res.status(200).send("Message was sent");
     }
   } catch (err) {

@@ -1,6 +1,6 @@
 import Link from "next/link";
-import GoogleIcon from "../public/google-icon.svg";
-import chatImage from "../public/chating.svg";
+import GoogleIcon from "../../public/google-icon.svg";
+import chatImage from "../../public/chating.svg";
 import Image from "next/image";
 export default function SignIn() {
   return (

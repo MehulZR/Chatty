@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import SignIn from "@/components/SignIn";
-import Main from "@/components/Main";
+import SignIn from "@/src/components/SignIn";
+import Main from "@/src/components/Main";
 import Head from "next/head";
 export default function Home() {
   const [loggedIn, setLoggedIn] = useState(false);

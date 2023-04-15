@@ -1,7 +1,7 @@
 export default function SearchUser({
-  setSearchQuery,
+  setSearchUserQuery,
   searchUserLoading,
-  searchQuery,
+  searchUserQuery,
 }) {
   let iconRenderHelper;
   if (searchUserLoading) {
@@ -28,7 +28,7 @@ export default function SearchUser({
         </g>
       </svg>,
     ];
-  } else if (searchQuery) {
+  } else if (searchUserQuery) {
     iconRenderHelper = [
       <svg
         className="flex-none p-1 cursor-pointer w-9 h-9"
@@ -84,8 +84,8 @@ export default function SearchUser({
         type="text"
         className="flex-1 w-0 py-2 pl-4 outline-none bg-neutral-800"
         placeholder="Search or Start a new chat"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
+        value={searchUserQuery}
+        onChange={(e) => setSearchUserQuery(e.target.value)}
       ></input>
       {iconRenderHelper}
     </div>

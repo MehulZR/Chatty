@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import pusher from "../../config/pusher.js";
+import pusher from "../../../config/pusher.js";
 export default async (req, res) => {
   try {
     if (!Object.hasOwnProperty.call(req.cookies, "Authentication"))
@@ -19,11 +19,14 @@ export default async (req, res) => {
       user_id: decoded.id,
       user_info: { name: decoded.name },
     };
-    const authResponse = pusher.authorizeChannel(
-      socket_id,
-      channel_name,
-      presenceData
-    );
+    let authResponse;
+    if (channel_name === "presence-global") {
+      authResponse = pusher.authorizeChannel(
+        socket_id,
+        channel_name,
+        presenceData
+      );
+    } else authResponse = pusher.authorizeChannel(socket_id, channel_name);
     res.status(200).send(authResponse);
   } catch (err) {
     console.log(err);
