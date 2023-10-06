@@ -20,7 +20,6 @@ These env variables need to be defined for proper functioning of the app.
 - PUSHER_APP_KEY
 - PUSHER_APP_SECRET
 - PUSHER_APP_CLUSTER
-- MONGODB_URI
 - DATABASE_NAME
 
 ### Note:
