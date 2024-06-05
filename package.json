@@ -7,7 +7,17 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*/**/*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*/**/*.{json,css,md}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@next/font": "13.1.6",
@@ -30,7 +40,11 @@
     "@types/node": "^20.2.5",
     "@types/react": "^18.2.8",
     "autoprefixer": "^10.4.13",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.5",
     "postcss": "^8.4.21",
+    "prettier": "^3.3.1",
     "prisma": "^4.12.0",
     "tailwindcss": "^3.2.4",
     "typescript": "^5.1.3"
