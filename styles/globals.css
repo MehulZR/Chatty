@@ -1,4 +1,7 @@
 @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Firefox */
 * {
   scrollbar-width: 5px;
@@ -17,6 +20,3 @@
   background-color: darkgray;
   border-radius: 10px;
 }
-
-@tailwind components;
-@tailwind utilities;

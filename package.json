@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "format": "prettier --write .",
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky"
   },
@@ -30,7 +31,8 @@
     "pusher-js": "8.4.0-rc2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-redux": "^9.1.2"
+    "react-redux": "^9.1.2",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.6",
@@ -50,6 +52,11 @@
     "prisma": "^5.15.0",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.4.5"
+  },
+  "pnpm": {
+    "overrides": {
+      "eslint>file-entry-cache": "^8"
+    }
   },
   "engines": {
     "node": ">=20"
