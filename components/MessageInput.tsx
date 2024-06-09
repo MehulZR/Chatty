@@ -5,11 +5,7 @@ import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { ADD_NEW_MESSAGE } from "../reducers/users";
 import { messageSchema } from "@/utils/validations";
-import { z } from "zod";
-const responseSchema = z.object({
-  status: z.string(),
-  data: messageSchema,
-});
+
 export default function MessageInput() {
   const dispatch = useAppDispatch();
   const [message, setMessage] = useState("");
@@ -25,18 +21,18 @@ export default function MessageInput() {
         "/api/message",
         {
           receiver_id: currentChatId,
-          msg: message,
+          message,
         },
         { withCredentials: true },
       );
-      const parsedResponse = responseSchema.safeParse(response.data);
+      const parsedResponse = messageSchema.safeParse(response.data);
       if (!parsedResponse.success) {
         throw new Error(parsedResponse.error.toString());
       }
       dispatch(
         ADD_NEW_MESSAGE({
           id: currentChatId,
-          data: parsedResponse.data.data,
+          data: parsedResponse.data,
         }),
       );
     } catch (err) {

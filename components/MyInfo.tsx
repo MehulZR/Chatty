@@ -1,11 +1,16 @@
 import logoutImage from "@/public/logout.webp";
 import Image from "next/image";
-import Link from "next/link";
 import { useAppSelector } from "../hooks";
 import userImage from "@/public/user.webp";
+import { useRouter } from "next/router";
 export default function MyInfo() {
   const name = useAppSelector((state) => state.myInfo.name);
   const pictureURL = useAppSelector((state) => state.myInfo.picture);
+  const router = useRouter();
+  const logout = async () => {
+    await fetch("/api/logout", { method: "POST" });
+    router.reload();
+  };
 
   return (
     <div className="flex items-center justify-between px-4 py-3">
@@ -19,16 +24,21 @@ export default function MyInfo() {
         ></Image>
         <span className="ml-2 text-lg ">{name}</span>
       </div>
-      <Link
+      <button
         className="w-10 h-10 p-2 overflow-hidden rounded-full hover:bg-neutral-800"
-        href="/api/logout"
+        onClick={() => void logout()}
       >
         <Image
           src={logoutImage}
           className="w-6 h-6 m-auto"
           alt="logout"
         ></Image>
-      </Link>
+      </button>
     </div>
   );
 }
+//<Link
+//  className="w-10 h-10 p-2 overflow-hidden rounded-full hover:bg-neutral-800"
+//  href="/api/logout"
+//>
+//</Link>
