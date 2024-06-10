@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 
 export async function GET() {
   const userId = auth(cookies().get("Authentication")?.value);
-  if (!userId) return Response.json("Unauthorised", { status: 400 });
+  if (!userId) return Response.json("Unauthorised", { status: 401 });
 
   try {
     const response = await prisma.user.findFirst({
