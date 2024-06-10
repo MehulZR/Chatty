@@ -22,7 +22,8 @@ export async function POST(req: NextRequest) {
     };
 
     const parsedRequestBody = requestFormDataSchema.safeParse(unparsedFormData);
-    if (!parsedRequestBody.success) throw new Error("Bad Request");
+    if (!parsedRequestBody.success)
+      throw new Error(parsedRequestBody.error.toString());
 
     const { socket_id, channel_name } = parsedRequestBody.data;
 
