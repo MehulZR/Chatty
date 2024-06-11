@@ -1,10 +1,11 @@
 import axios from "axios";
-import jwt from "jsonwebtoken";
 import { getToken } from "@/config/oauth";
 import prisma from "@/db/client";
 import { z } from "zod";
 import { NextRequest } from "next/server";
 import { cookies } from "next/headers";
+import { SignJWT } from "jose";
+import { TextEncoder } from "util";
 
 const oauthRequestBodySchema = z.object({
   id: z.string(),
@@ -55,9 +56,9 @@ export async function GET(request: NextRequest) {
     if (!process.env.JWT_PRIVATE_KEY)
       throw new Error("JWT_PRIVATE_KEY not found");
 
-    const jsonWebToken = jwt.sign({ id: userId }, process.env.JWT_PRIVATE_KEY, {
-      algorithm: "RS256",
-    });
+    const jsonWebToken = await new SignJWT({ id: userId })
+      .setProtectedHeader({ alg: "HS256" })
+      .sign(new TextEncoder().encode(process.env.JWT_KEY));
 
     cookies().set({
       name: "Authentication",

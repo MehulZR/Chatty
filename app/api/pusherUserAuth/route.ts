@@ -8,7 +8,7 @@ import { NextRequest } from "next/server";
 const requestFormDataSchema = z.string();
 
 export async function POST(req: NextRequest) {
-  const userId = auth(cookies().get("Authentication")?.value);
+  const userId = await auth(cookies().get("Authentication")?.value);
   if (!userId) return Response.json("Unauthoried", { status: 401 });
 
   try {

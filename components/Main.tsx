@@ -1,3 +1,4 @@
+"use client";
 import { useEffect } from "react";
 import axios from "axios";
 import Pusher, { Members as MembersTypes } from "pusher-js";

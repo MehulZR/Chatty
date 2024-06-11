@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
-  const userId = auth(cookies().get("Authentication")?.value);
+  const userId = await auth(cookies().get("Authentication")?.value);
   if (!userId) return Response.json("Unauthorised", { status: 401 });
 
   const searchParams = request.nextUrl.searchParams;

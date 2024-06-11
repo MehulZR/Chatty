@@ -1,19 +1,23 @@
 import { z } from "zod";
-import jwt from "jsonwebtoken";
+import * as jose from "jose";
 
 export const jwtPayloadSchema = z.object({
   id: z.number(),
 });
 
-export function auth(jwtToken: string | undefined) {
+export async function auth(jwtToken: string | undefined) {
   if (!jwtToken) return null;
   try {
-    const decoded = jwt.verify(jwtToken, process.env.JWT_PUBLIC_KEY!);
+    const decoded = await jose.jwtVerify(
+      jwtToken,
+      new TextEncoder().encode(process.env.JWT_KEY),
+    );
 
-    const parsedJWTPayload = jwtPayloadSchema.safeParse(decoded);
+    const parsedJWTPayload = jwtPayloadSchema.safeParse(decoded.payload);
 
     if (parsedJWTPayload.success) return parsedJWTPayload.data.id;
-  } catch {
-    return null;
+  } catch (err) {
+    console.error(err);
   }
+  return null;
 }

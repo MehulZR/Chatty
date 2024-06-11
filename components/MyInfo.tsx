@@ -2,14 +2,14 @@ import logoutImage from "@/public/logout.webp";
 import Image from "next/image";
 import { useAppSelector } from "../hooks";
 import userImage from "@/public/user.webp";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 export default function MyInfo() {
   const name = useAppSelector((state) => state.myInfo.name);
   const pictureURL = useAppSelector((state) => state.myInfo.picture);
   const router = useRouter();
   const logout = async () => {
     await fetch("/api/logout", { method: "POST" });
-    router.reload();
+    router.push("/login");
   };
 
   return (
@@ -37,8 +37,3 @@ export default function MyInfo() {
     </div>
   );
 }
-//<Link
-//  className="w-10 h-10 p-2 overflow-hidden rounded-full hover:bg-neutral-800"
-//  href="/api/logout"
-//>
-//</Link>

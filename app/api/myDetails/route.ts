@@ -3,7 +3,7 @@ import { auth } from "@/utils/utils";
 import { cookies } from "next/headers";
 
 export async function GET() {
-  const userId = auth(cookies().get("Authentication")?.value);
+  const userId = await auth(cookies().get("Authentication")?.value);
   if (!userId) return Response.json("Unauthorised", { status: 401 });
 
   try {

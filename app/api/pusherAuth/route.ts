@@ -11,7 +11,7 @@ const requestFormDataSchema = z.object({
 });
 
 export async function POST(req: NextRequest) {
-  const userId = auth(cookies().get("Authentication")?.value);
+  const userId = await auth(cookies().get("Authentication")?.value);
   if (!userId) return Response.json("Unauthorised", { status: 401 });
 
   try {
