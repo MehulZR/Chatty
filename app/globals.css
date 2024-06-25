@@ -20,3 +20,41 @@
   background-color: darkgray;
   border-radius: 10px;
 }
+
+@layer base {
+  :root {
+    --color-text-green: #007339;
+    --color-bg-blue: #1a66ff;
+    --accent-purple: #bf80ff;
+    --accent-rose-red: #ff264a;
+    --color-bg-primary: #ffffff;
+    --color-bg-secondary: #f2f2f2;
+    --color-bg-tertiary: #f2f2f2;
+    --color-bg-red: #ffebee;
+    --color-bg-purple: #f9f2ff;
+    --color-border: #f2f2f2;
+    --color-border-dark: #d9d9d9;
+    --color-text-primary: #000000;
+    --color-text-secondary: #404040;
+    --color-text-red: #99001a;
+    --color-toggle-background: #e6e6e6;
+  }
+
+  html[class="dark"] {
+    --accent-green: #00a653;
+    --accent-blue: #1a66ff;
+    --accent-purple: #550080;
+    --accent-rose-red: #ff264a;
+    --color-bg-primary: #0a0a0a;
+    --color-bg-secondary: #141414;
+    --color-bg-tertiary: #050505;
+    --color-bg-red: #40000b;
+    --color-bg-purple: #1a0026;
+    --color-border: #141414;
+    --color-border-dark: #000000;
+    --color-text-primary: #cccccc;
+    --color-text-secondary: #999999;
+    --color-text-red: #ff667f;
+    --color-toggle-background: #e6e6e6;
+  }
+}
