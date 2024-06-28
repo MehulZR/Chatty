@@ -3,22 +3,27 @@
 @tailwind utilities;
 
 /* Firefox */
-* {
-  scrollbar-width: 5px;
-}
+/** {*/
+/*  scrollbar-width: 5px;*/
+/*}*/
 
 /* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-  width: 4px;
+  width: 5px;
 }
 
 *::-webkit-scrollbar-track {
-  background: none;
+  background: transparent;
 }
 
 *::-webkit-scrollbar-thumb {
   background-color: darkgray;
-  border-radius: 10px;
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-button {
+  height: 0px;
+  width: 0px;
 }
 
 @layer base {

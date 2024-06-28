@@ -1,17 +1,20 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-interface Message {
+
+export interface Message {
   sender_id: string;
   message: string;
   receiver_id: string;
   created_at: string;
 }
-interface User {
+
+export interface User {
   name: string;
   id: string;
   picture: string;
-  messages?: Message[];
-  noMoreMessage?: boolean;
+  messages: Message[];
+  noMoreMessage: boolean;
 }
+
 type UsersInitialState = Record<string | number, User>;
 const initialState: UsersInitialState = {};
 const usersSlice = createSlice({
@@ -20,7 +23,7 @@ const usersSlice = createSlice({
   reducers: {
     ADD_USERS: (state, action: PayloadAction<User[]>) => {
       action.payload.forEach((user) => {
-        state[user.id] = user;
+        state[user.id] = { ...user, messages: [], noMoreMessage: false };
       });
     },
     ADD_MESSAGES: (
@@ -29,7 +32,7 @@ const usersSlice = createSlice({
     ) => {
       const { id, data } = action.payload;
       if (!Object.hasOwn(state[id], "messages")) state[id].messages = [];
-      state[id].messages!.push(...data);
+      state[id].messages.push(...data);
     },
     ADD_NEW_MESSAGE: (
       state,
@@ -37,7 +40,7 @@ const usersSlice = createSlice({
     ) => {
       const { id, data } = action.payload;
       if (!Object.hasOwn(state[id], "messages")) state[id].messages = [];
-      state[id].messages!.unshift(data);
+      state[id].messages.unshift(data);
     },
     NO_MORE_MESSAGES: (state, action: PayloadAction<string>) => {
       state[action.payload].noMoreMessage = true;

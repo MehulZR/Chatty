@@ -43,7 +43,7 @@ export async function GET(request: NextRequest) {
         created_at: "desc",
       },
       skip: skippedMessageCount,
-      take: 50,
+      take: 10,
     });
 
     return Response.json(response);

@@ -12,8 +12,8 @@ export default function Login() {
   return (
     <div className="min-h-svh h-svh p-4 xl:pr-0 2xl:pr-14 bg-primary">
       <div className="overflow flex gap-14 h-full items-center justify-evenly">
-        <div className="text-primary  xl:min-w-[500px] w-full justify-center items-center flex flex-col gap-12">
-          <div>
+        <div className="text-primary max-w-[500px] xl:max-w-none xl:min-w-[500px] w-full xl:w-min justify-center items-center flex flex-col gap-12">
+          <div className="flex flex-col gap-2">
             <p
               className={
                 plusJakartaSans.className +
