@@ -81,6 +81,11 @@ export default function UserList() {
     }
   }, [searchQuery]);
 
+  function setCurrChatHelper(id: string) {
+    if (!Object.hasOwn(users, id)) dispatch(ADD_USERS([searchResult[id]]));
+    dispatch(SET_CURRENT_CHAT_ID(id));
+  }
+
   const renderHelper = Object.values(
     searchQuery.length ? searchResult : users,
   ).map((user) => {
@@ -88,7 +93,7 @@ export default function UserList() {
       <div
         className={`flex rounded hover:bg-secondary gap-2 p-2 justify-start items-center ${currChatId === user.id ? "bg-secondary" : ""}`}
         key={user.id}
-        onClick={() => dispatch(SET_CURRENT_CHAT_ID(user.id))}
+        onClick={() => setCurrChatHelper(user.id)}
       >
         <Avatar className="h-8 w-8">
           <AvatarImage src={user.picture}></AvatarImage>
