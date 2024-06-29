@@ -18,7 +18,7 @@ export default function OtherUserInfo() {
     currChatId ? state.onlineUsers[currChatId] : false,
   );
   return (
-    <div className="pr-4 lg:pl-4 h-14 lg:h-20 border-b border-b-primary flex-shrink-0 flex gap-1 justify-start items-center">
+    <div className="pr-4 lg:pl-4 h-14 md:h-20 border-b border-b-primary flex-shrink-0 flex gap-1 justify-start items-center">
       <Button
         size="icon"
         className="lg:hidden ml-1 bg-primary rounded-full"
@@ -26,16 +26,18 @@ export default function OtherUserInfo() {
       >
         <FeatherIcon icon="arrow-left" />
       </Button>
-      <div className="flex justify-start items-center gap-1">
-        <Avatar className="h-8 w-8 lg:w-10 lg:h-10">
+      <div className="flex justify-start items-center gap-2">
+        <Avatar className="h-8 w-8 md:w-10 md:h-10">
           <AvatarImage src={currChatUserPicURL}></AvatarImage>
           <AvatarFallback>
             <FeatherIcon icon="user" />
           </AvatarFallback>
         </Avatar>
         <div className="flex flex-col justify-center items-start">
-          <p className="text-base font-medium lg:text-xl">{currChatUserName}</p>
-          <p className="text-green font-medium lg:font-semibold text-[10px] lg:text-sm">
+          <p className="font-medium md:font-normal text-base md:text-xl">
+            {currChatUserName}
+          </p>
+          <p className="text-green font-medium md:font-semibold text-[10px] md:text-sm">
             {isOnline && "Online"}
           </p>
         </div>

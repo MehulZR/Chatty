@@ -9,8 +9,15 @@ import { SET_CURRENT_CHAT_ID } from "@/reducers/currentChatId";
 import FeatherIcon from "feather-icons-react";
 import { Input } from "./ui/input";
 import { LucideLoaderCircle, LucideSearch, LucideX } from "lucide-react";
+import { Plus_Jakarta_Sans } from "next/font/google";
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export default function UserList() {
+  const currChatId = useAppSelector((state) => state.currentChatId);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResult, setSearchResult] = useState<Record<string, User>>({});
   const [searchIsLoading, setSearchIsLoading] = useState(false);
@@ -79,7 +86,7 @@ export default function UserList() {
   ).map((user) => {
     return (
       <div
-        className="flex rounded hover:bg-secondary gap-2 p-2 justify-start items-center"
+        className={`flex rounded hover:bg-secondary gap-2 p-2 justify-start items-center ${currChatId === user.id ? "bg-secondary" : ""}`}
         key={user.id}
         onClick={() => dispatch(SET_CURRENT_CHAT_ID(user.id))}
       >
@@ -89,7 +96,7 @@ export default function UserList() {
             <FeatherIcon icon="user" className="h-5 w-5" />
           </AvatarFallback>
         </Avatar>
-        <p className="text-sm lg:text-base">{user.name}</p>
+        <p className="text-sm md:text-base">{user.name}</p>
       </div>
     );
   });
@@ -118,13 +125,18 @@ function SearchUser({
   setSearchQuery: Dispatch<SetStateAction<string>>;
 }) {
   return (
-    <div className="lg:h-32 flex-shrink-0 px-4 mb-2 lg:mb-4">
-      <p className="font-semibold text-xl lg:text-4xl mt-4 mb-3 lg:mt-6 lg:mb-5">
+    <div className="md:h-32 flex-shrink-0 px-4 mb-2 md:mb-4">
+      <p
+        className={
+          plusJakartaSans.className +
+          " font-semibold text-2xl md:text-4xl mt-4 mb-3 md:mt-6 md:mb-5"
+        }
+      >
         Chats
       </p>
       <div className="flex justify-center z-10 items-center relative">
         <Input
-          className="bg-secondary border pl-4 pr-12 py-2 border-secondary text-base placeholder-secondary"
+          className="bg-secondary border pl-4 pr-12 py-2 border-secondary text-s md:text-base placeholder-secondary"
           placeholder="Search Username"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -132,15 +144,15 @@ function SearchUser({
         <div className="absolute right-4">
           {searchQuery ? (
             searchIsLoading ? (
-              <LucideLoaderCircle className="animate-spin w-5 h-5 lg:w-6 lg:h-6" />
+              <LucideLoaderCircle className="animate-spin w-5 h-5 md:w-6 md:h-6" />
             ) : (
               <LucideX
-                className="cursor-pointer w-5 h-5 lg:w-6 lg:h-6"
+                className="cursor-pointer w-5 h-5 md:w-6 md:h-6"
                 onClick={() => void setSearchQuery("")}
               />
             )
           ) : (
-            <LucideSearch className="w-5 h-5 lg:w-6 lg:h-6" />
+            <LucideSearch className="w-5 h-5 md:w-6 md:h-6" />
           )}
         </div>
       </div>

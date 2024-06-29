@@ -9,7 +9,7 @@ export default function Home() {
     <StoreProvider>
       <PusherProvider>
         <EscapeWrapper>
-          <div className="flex min-h-svh bg-primary h-svh">
+          <div className="flex min-h-svh text-primary bg-primary h-svh">
             <LeftSection />
             <RightSection />
           </div>

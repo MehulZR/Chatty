@@ -98,11 +98,9 @@ export default function MyInfo() {
         }}
         className={`backdrop:bg-black/80 justify-center text-primary items-end  md:items-center bg-transparent max-w-none max-h-none h-screen w-screen ${isAboutSectionOpen ? "flex" : ""}`}
       >
-        <div className="flex flex-col bg-primary w-fit md:border-2 border-primary rounded-t-2xl md:rounded-md">
+        <div className="flex flex-col bg-primary w-fit md:border-2 border-primary p-2 rounded-t-2xl md:rounded-md">
           <div className="flex justify-between px-4 pt-4 md:p-5 items-center md:border-b md:border-b-primary">
-            <h1 className="font-medium text-xl md:text-2xl text-primary">
-              About
-            </h1>
+            <h1 className="font-medium text-2xl text-primary">About</h1>
             <div
               onClick={() => void setIsAboutSectionOpen(false)}
               className="cursor-pointer"
@@ -113,7 +111,7 @@ export default function MyInfo() {
               />
             </div>
           </div>
-          <div className="flex flex-col p-4 md:p-5 gap-2 border-b border-b-primary">
+          <div className="flex flex-col p-4 md:p-5 gap-2 md:border-b border-b-primary">
             <Image
               src={Chating}
               alt="Two people chating online"
@@ -142,7 +140,7 @@ export default function MyInfo() {
               </p>
             </div>
           </div>
-          <p className="p-4 md:p-5 text-secondary text-xs md:text-sm">
+          <p className="p-4 md:p-5 text-secondary text-xs md:text-sm bg-purple md:bg-primary border-accent-purple md:border-none border-2 md:m-0 mb-8 m-2 text-center md:text-left rounded-lg md:rounded-none">
             Made with{" "}
             <span className="text-accent-rose-red inline-flex items-center">
               <svg

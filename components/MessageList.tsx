@@ -19,12 +19,12 @@ function Msg({
   return (
     <div className={`w-fit ${isSender && "self-end"}`}>
       <div
-        className={`bg-secondary rounded-b-lg text-sm lg:text-base p-2 lg:p-4 w-fit ${isSender ? "rounded-tl-lg" : "rounded-tr-lg"}`}
+        className={`bg-secondary rounded-b-lg text-sm md:text-base p-2 md:p-4 w-fit ${isSender ? "rounded-tl-lg" : "rounded-tr-lg"}`}
       >
         {message}
       </div>
       <p
-        className={`text-[10px] lg:text-xs text-secondary ${isSender && "text-right"}`}
+        className={`text-[10px] md:text-xs text-secondary ${isSender && "text-right"}`}
       >
         {time.toLocaleTimeString("en-US", {
           timeStyle: "short",
@@ -38,7 +38,7 @@ function MessageSeparatorByDate({ date }: { date: Date }) {
   return (
     <div className="my-2 flex gap-2 justify-center items-center">
       <div className="flex-grow border-b border-b-primary"></div>
-      <p className="text-[10px] lg:text-xs text-secondary">
+      <p className="text-[10px] md:text-xs text-secondary">
         {date.toDateString()}
       </p>
       <div className="flex-grow border-b border-b-primary"></div>
@@ -100,7 +100,7 @@ export default function MessageList() {
   }
 
   return (
-    <div className="flex scroll-auto flex-grow overflow-y-scroll flex-col-reverse py-4 px-4 lg:px-8 gap-2 lg:gap-4">
+    <div className="flex scroll-auto flex-grow overflow-y-scroll flex-col-reverse py-4 px-4 md:px-8 gap-2 md:gap-4">
       {renderHelper}
     </div>
   );
