@@ -1,5 +1,6 @@
 import { authorizationURL } from "@/config/oauth";
 
-export function GET() {
+// eslint-disable-next-line @typescript-eslint/require-await
+export async function GET() {
   return Response.redirect(authorizationURL);
 }
