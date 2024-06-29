@@ -1,29 +1,44 @@
-import Image from "next/image";
-import userImage from "@/public/user.webp";
-import { useAppSelector } from "../hooks";
+"use client";
+import FeatherIcon from "feather-icons-react";
+import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { Button } from "./ui/button";
+import { SET_CURRENT_CHAT_ID } from "@/reducers/currentChatId";
+
 export default function OtherUserInfo() {
-  const currentChatId = useAppSelector((state) => state.currentChatId);
-  const name = useAppSelector((state) =>
-    currentChatId ? state.users[currentChatId].name : null,
+  const dispatch = useAppDispatch();
+  const currChatId = useAppSelector((state) => state.currentChatId);
+  const currChatUserName = useAppSelector((state) =>
+    currChatId ? state.users[currChatId].name : null,
   );
-  const pictureURL = useAppSelector((state) =>
-    currentChatId ? state.users[currentChatId].picture : null,
+  const currChatUserPicURL = useAppSelector((state) =>
+    currChatId ? state.users[currChatId].picture : "",
   );
-  const onlineStatus = useAppSelector((state) =>
-    currentChatId ? state.onlineUsers[currentChatId] : null,
+  const isOnline = useAppSelector((state) =>
+    currChatId ? state.onlineUsers[currChatId] : false,
   );
   return (
-    <div className="flex items-center px-4 py-3">
-      <Image
-        src={pictureURL ?? userImage}
-        className="w-10 h-10 overflow-hidden rounded-full"
-        alt="user_image"
-        width={40}
-        height={40}
-      ></Image>
-      <div className="flex flex-col justify-center ml-2 ">
-        <p className={onlineStatus ? "" : "text-lg"}>{name}</p>
-        {onlineStatus ? <p className="text-xs">Online</p> : ""}
+    <div className="pr-4 lg:pl-4 h-14 lg:h-20 border-b border-b-primary flex-shrink-0 flex gap-1 justify-start items-center">
+      <Button
+        size="icon"
+        className="lg:hidden ml-1 bg-primary rounded-full"
+        onClick={() => void dispatch(SET_CURRENT_CHAT_ID(null))}
+      >
+        <FeatherIcon icon="arrow-left" />
+      </Button>
+      <div className="flex justify-start items-center gap-1">
+        <Avatar className="h-8 w-8 lg:w-10 lg:h-10">
+          <AvatarImage src={currChatUserPicURL}></AvatarImage>
+          <AvatarFallback>
+            <FeatherIcon icon="user" />
+          </AvatarFallback>
+        </Avatar>
+        <div className="flex flex-col justify-center items-start">
+          <p className="text-base font-medium lg:text-xl">{currChatUserName}</p>
+          <p className="text-green font-medium lg:font-semibold text-[10px] lg:text-sm">
+            {isOnline && "Online"}
+          </p>
+        </div>
       </div>
     </div>
   );

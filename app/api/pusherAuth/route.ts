@@ -1,7 +1,7 @@
 import pusher from "@/config/pusher";
 import prisma from "@/db/client";
 import z from "zod";
-import { auth } from "@/utils/utils";
+import { auth } from "@/lib/utils";
 import { cookies } from "next/headers";
 import { NextRequest } from "next/server";
 

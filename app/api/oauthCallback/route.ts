@@ -53,9 +53,6 @@ export async function GET(request: NextRequest) {
       userId = newUser.id;
     }
 
-    if (!process.env.JWT_PRIVATE_KEY)
-      throw new Error("JWT_PRIVATE_KEY not found");
-
     const jsonWebToken = await new SignJWT({ id: userId })
       .setProtectedHeader({ alg: "HS256" })
       .sign(new TextEncoder().encode(process.env.JWT_KEY));
@@ -65,8 +62,8 @@ export async function GET(request: NextRequest) {
       value: jsonWebToken,
       httpOnly: true,
       secure: true,
+      maxAge: 2592000,
     });
-    cookies().set("LoggedIn", "null");
 
     if (!process.env.ORIGIN) throw new Error("Origin URL not found");
 

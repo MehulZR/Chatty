@@ -1,7 +1,7 @@
 "use client";
 import EscapeWrapper from "@/components/EscapeWrapper";
-import LeftSection from "@/components/left";
-import RightSection from "@/components/right";
+import LeftSection from "@/components/Left";
+import RightSection from "@/components/Right";
 import { PusherProvider, StoreProvider } from "@/providers";
 
 export default function Home() {

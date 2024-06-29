@@ -2,7 +2,7 @@ import pusher from "@/config/pusher";
 import prisma from "@/db/client";
 import { NextRequest } from "next/server";
 import z from "zod";
-import { auth } from "@/utils/utils";
+import { auth } from "@/lib/utils";
 import { cookies } from "next/headers";
 
 export async function GET(request: NextRequest) {
@@ -43,7 +43,7 @@ export async function GET(request: NextRequest) {
         created_at: "desc",
       },
       skip: skippedMessageCount,
-      take: 10,
+      take: 50,
     });
 
     return Response.json(response);
