@@ -1,7 +1,7 @@
 "use client";
 import { useIntersectionObserver } from "@uidotdev/usehooks";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { ReactElement, useEffect } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { messagesSchema } from "@/lib/validations";
 import { ADD_MESSAGES, Message, NO_MORE_MESSAGES } from "@/reducers/users";
 import axios from "axios";
@@ -107,6 +107,7 @@ export default function MessageList() {
 }
 
 function LoadMoreMessages() {
+  const [isLoading, setIsLoading] = useState(false);
   const [ref, entry] = useIntersectionObserver();
   const dispatch = useAppDispatch();
 
@@ -119,9 +120,12 @@ function LoadMoreMessages() {
   );
 
   useEffect(() => {
+    const abortController = new AbortController();
+
     if (entry?.isIntersecting && currChatId && noMoreMessages != null) {
-      const abortController = new AbortController();
       void (async () => {
+        setIsLoading(true);
+
         const response = await fetchChat({
           currChatId,
           noMoreMessages,
@@ -129,21 +133,21 @@ function LoadMoreMessages() {
           abortSignal: abortController.signal,
         });
 
-        if (!response) return;
+        if (response?.length) {
+          dispatch(ADD_MESSAGES({ id: currChatId, data: response }));
+          if (response.length < 50) dispatch(NO_MORE_MESSAGES(currChatId));
+        }
 
-        dispatch(ADD_MESSAGES({ id: currChatId, data: response }));
-        if (response.length < 50) dispatch(NO_MORE_MESSAGES(currChatId));
-
-        return () => {
-          abortController.abort();
-        };
+        setIsLoading(false);
       })();
     }
+
+    return () => abortController.abort();
   }, [entry?.isIntersecting, currChatId, noMoreMessages, messages, dispatch]);
 
   return (
     <div ref={ref} className="w-min self-center">
-      <LoaderCircleIcon className="animate-spin" />
+      {isLoading && <LoaderCircleIcon className="animate-spin" />}
     </div>
   );
 }
