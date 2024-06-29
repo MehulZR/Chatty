@@ -1,6 +1,7 @@
+export const dynamic = "force-dynamic";
+
 import { authorizationURL } from "@/config/oauth";
 
-// eslint-disable-next-line @typescript-eslint/require-await
-export async function GET() {
+export function GET() {
   return Response.redirect(authorizationURL);
 }
