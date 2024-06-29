@@ -17,6 +17,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Chating from "@/public/Chating.png";
 import Link from "next/link";
+import { DropdownMenuGroup } from "./ui/dropdown-menu";
 export default function MyInfo() {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const [isAboutSectionOpen, setIsAboutSectionOpen] = useState(false);
@@ -54,38 +55,42 @@ export default function MyInfo() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            className="flex z-20 rounded-md border-2 bg-primary border-primary flex-col gap-2 p-2 min-w-[200px]"
+            className="flex z-20 rounded-md border-2 bg-primary border-primary flex-col gap-2 min-w-[200px]"
             align="end"
             alignOffset={0}
             sideOffset={8}
           >
-            <DropdownMenuItem
-              className="flex hover:bg-secondary justify-between rounded p-2 hover:outline-none"
-              onSelect={(e) => e.preventDefault()}
-            >
-              <div className="flex justify-between w-full items-center">
-                <p>Dark Mode</p>
-                <Switch
-                  checked={resolvedTheme === "dark"}
-                  onCheckedChange={() =>
-                    setTheme(resolvedTheme === "dark" ? "light" : "dark")
-                  }
-                />
-              </div>
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => setIsAboutSectionOpen(true)}
-              className="p-2 rounded hover:bg-secondary hover:outline-none"
-            >
-              About
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem
-              className="p-2 rounded hover:outline-none hover:bg-red text-red"
-              onClick={() => void logout()}
-            >
-              Logout
-            </DropdownMenuItem>
+            <DropdownMenuGroup className="p-2 pb-0">
+              <DropdownMenuItem
+                className="flex hover:bg-secondary justify-between rounded p-2 hover:outline-none"
+                onSelect={(e) => e.preventDefault()}
+              >
+                <div className="flex justify-between w-full items-center">
+                  <p>Dark Mode</p>
+                  <Switch
+                    checked={resolvedTheme === "dark"}
+                    onCheckedChange={() =>
+                      setTheme(resolvedTheme === "dark" ? "light" : "dark")
+                    }
+                  />
+                </div>
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => setIsAboutSectionOpen(true)}
+                className="p-2 rounded hover:bg-secondary hover:outline-none"
+              >
+                About
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator className="bg-secondary h-px" />
+            <DropdownMenuGroup className="p-2 pt-0">
+              <DropdownMenuItem
+                className="p-2 rounded hover:outline-none hover:bg-red text-red"
+                onClick={() => void logout()}
+              >
+                Logout
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
