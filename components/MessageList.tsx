@@ -133,7 +133,7 @@ function LoadMoreMessages() {
           abortSignal: abortController.signal,
         });
 
-        if (response?.length) {
+        if (response) {
           dispatch(ADD_MESSAGES({ id: currChatId, data: response }));
           if (response.length < 50) dispatch(NO_MORE_MESSAGES(currChatId));
         }
