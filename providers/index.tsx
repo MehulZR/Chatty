@@ -4,7 +4,7 @@ import { SET_INFO } from "@/reducers/myInfo";
 import { SET_USERS_OFFLINE, SET_USERS_ONLINE } from "@/reducers/onlineUsers";
 import { ADD_NEW_MESSAGE } from "@/reducers/users";
 import { store } from "@/store";
-import { userSchema } from "@/utils/validations";
+import { userSchema } from "@/lib/validations";
 import axios from "axios";
 import Pusher, { Members as MembersTypes } from "pusher-js";
 import Ajax from "pusher-js/types/src/core/http/ajax";

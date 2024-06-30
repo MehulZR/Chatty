@@ -1,3 +1,4 @@
+import { Omit } from "@prisma/client/runtime/library";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 export interface Message {
@@ -21,7 +22,10 @@ const usersSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
-    ADD_USERS: (state, action: PayloadAction<User[]>) => {
+    ADD_USERS: (
+      state,
+      action: PayloadAction<Omit<User, "messages" | "noMoreMessage">[]>,
+    ) => {
       action.payload.forEach((user) => {
         state[user.id] = { ...user, messages: [], noMoreMessage: false };
       });

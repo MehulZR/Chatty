@@ -9,6 +9,7 @@
     "lint": "next lint",
     "format": "prettier --write .",
     "preinstall": "npx only-allow pnpm",
+    "postinstall":"prisma generate",
     "prepare": "husky"
   },
   "lint-staged": {

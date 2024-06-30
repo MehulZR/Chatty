@@ -1,5 +1,5 @@
 import prisma from "@/db/client";
-import { auth } from "@/utils/utils";
+import { auth } from "@/lib/utils";
 import { cookies } from "next/headers";
 import { NextRequest } from "next/server";
 

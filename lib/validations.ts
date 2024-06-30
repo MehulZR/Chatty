@@ -16,3 +16,7 @@ export const messageSchema = z.object({
 });
 
 export const messagesSchema = z.array(messageSchema);
+
+export const jwtPayloadSchema = z.object({
+  id: z.number(),
+});

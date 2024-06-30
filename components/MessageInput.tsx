@@ -1,10 +1,12 @@
-import planeImage from "@/public/paper-plane.webp";
-import axios from "axios";
-import Image from "next/image";
+"use client";
+import FeatherIcon from "feather-icons-react";
+import { Input } from "./ui/input";
 import { useState } from "react";
-import { useAppDispatch, useAppSelector } from "../hooks";
-import { ADD_NEW_MESSAGE } from "../reducers/users";
-import { messageSchema } from "@/utils/validations";
+import { Button } from "./ui/button";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import axios from "axios";
+import { messageSchema } from "@/lib/validations";
+import { ADD_NEW_MESSAGE } from "@/reducers/users";
 
 export default function MessageInput() {
   const dispatch = useAppDispatch();
@@ -42,24 +44,23 @@ export default function MessageInput() {
   };
 
   return (
-    <div className="flex px-4 py-3">
-      <input
-        type="text"
-        className="px-4 py-2 rounded-lg outline-none bg-neutral-800 grow"
+    <div className="flex justify-center items-center flex-shrink-0 gap-2 px-4 py-2 md:py-4 border-t border-t-primary">
+      <Input
+        className="bg-secondary border px-4 py-2 border-secondary text-sm md:text-base placeholder-secondary"
         placeholder="Type a message"
-        id="msg_input"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         onKeyDown={(e) => {
           if (e.key === "Enter") void sendMessage();
         }}
-      ></input>
-      <button
-        className="w-10 h-10 ml-4 overflow-hidden rounded-full bg-sky-600 "
+      />
+      <Button
+        size="icon"
+        className="md:w-9 md:h-9 h-10 w-10 p-px bg-black rounded-3xl flex-shrink-0 text-white flex justify-center items-center"
         onClick={() => void sendMessage()}
       >
-        <Image src={planeImage} className="w-5 h-5 m-auto" alt="send"></Image>
-      </button>
+        <FeatherIcon icon="send" className="-translate-x-[2px] w-6 h-6" />
+      </Button>
     </div>
   );
 }
