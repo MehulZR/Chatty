@@ -46,7 +46,7 @@ export default function MessageInput() {
   return (
     <div className="flex justify-center items-center flex-shrink-0 gap-2 px-4 py-2 md:py-4 border-t border-t-primary">
       <Input
-        className="bg-secondary border px-4 py-2 border-secondary text-sm md:text-base placeholder-secondary"
+        className="bg-secondary border px-4 py-2 border-secondary text-base placeholder-secondary"
         placeholder="Type a message"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
