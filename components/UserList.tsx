@@ -141,7 +141,7 @@ function SearchUser({
       </p>
       <div className="flex justify-center z-10 items-center relative">
         <Input
-          className="bg-secondary border pl-4 pr-12 py-2 border-secondary text-s md:text-base placeholder-secondary"
+          className="bg-secondary border pl-4 pr-12 py-2 border-secondary text-base placeholder-secondary"
           placeholder="Search Username"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
