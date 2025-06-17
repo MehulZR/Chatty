@@ -33,9 +33,11 @@ function Msg({
   return (
     <div className={`w-fit ${isSender && "self-end"}`}>
       <div className="flex gap-2 items-center">
-        <button onClick={() => void deleteMessage(messageId)}>
-          <FeatherIcon icon="trash" />
-        </button>
+        {isSender && (
+          <button onClick={() => void deleteMessage(messageId)}>
+            <FeatherIcon icon="trash" />
+          </button>
+        )}
         <div
           className={`bg-secondary rounded-b-lg text-sm md:text-base p-2 md:p-4 w-fit ${isSender ? "rounded-tl-lg" : "rounded-tr-lg"}`}
         >
