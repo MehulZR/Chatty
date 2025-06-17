@@ -14,7 +14,7 @@ import { Provider } from "react-redux";
 interface Message {
   sender_id: string;
   receiver_id: string;
-  id: string;
+  id: number;
   message: string;
   created_at: string;
 }

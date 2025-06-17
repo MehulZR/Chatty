@@ -6,22 +6,41 @@ import { messagesSchema } from "@/lib/validations";
 import { ADD_MESSAGES, Message, NO_MORE_MESSAGES } from "@/reducers/users";
 import axios from "axios";
 import { LoaderCircleIcon } from "lucide-react";
+import FeatherIcon from "feather-icons-react";
+
+async function deleteMessage(messageId: number) {
+  try {
+    await axios.delete("/api/message", {
+      withCredentials: true,
+      data: { messageId },
+    });
+  } catch (err) {
+    console.error(err);
+  }
+}
 
 function Msg({
   message,
+  messageId,
   isSender,
   time,
 }: {
   message: string;
+  messageId: number;
   isSender: boolean;
   time: Date;
 }) {
   return (
     <div className={`w-fit ${isSender && "self-end"}`}>
-      <div
-        className={`bg-secondary rounded-b-lg text-sm md:text-base p-2 md:p-4 w-fit ${isSender ? "rounded-tl-lg" : "rounded-tr-lg"}`}
-      >
-        {message}
+      <div className="flex gap-2 items-center">
+        <button onClick={() => void deleteMessage(messageId)}>
+          <FeatherIcon icon="trash" />
+        </button>
+        <div
+          className={`bg-secondary rounded-b-lg text-sm md:text-base p-2 md:p-4 w-fit ${isSender ? "rounded-tl-lg" : "rounded-tr-lg"}`}
+        >
+          {message}
+        </div>
       </div>
       <p
         className={`text-[10px] md:text-xs text-secondary ${isSender && "text-right"}`}
@@ -66,6 +85,7 @@ export default function MessageList() {
         message,
         sender_id: senderId,
         created_at: createdAt,
+        id: messageId,
       } = messages[i];
       const prevCreatedAt = messages[i - 1]?.created_at;
 
@@ -81,6 +101,7 @@ export default function MessageList() {
       renderHelper.push(
         <Msg
           message={message}
+          messageId={messageId}
           isSender={senderId === myId}
           time={currTime}
           key={i}

@@ -6,6 +6,7 @@ export interface Message {
   message: string;
   receiver_id: string;
   created_at: string;
+  id: number;
 }
 
 export interface User {
