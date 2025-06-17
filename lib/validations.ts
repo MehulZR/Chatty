@@ -13,6 +13,7 @@ export const messageSchema = z.object({
   receiver_id: z.number().transform((val) => val.toString()),
   message: z.string(),
   created_at: z.string(),
+  id: z.number(),
 });
 
 export const messagesSchema = z.array(messageSchema);

@@ -5,6 +5,34 @@ import z from "zod";
 import { auth } from "@/lib/utils";
 import { cookies } from "next/headers";
 
+const deleteBodySchema = z.object({
+  messageId: z.number(),
+});
+
+export async function DELETE(request: NextRequest) {
+  const userId = await auth(cookies().get("Authentication")?.value);
+
+  if (!userId) return Response.json("Unauthorized", { status: 401 });
+
+  const parsedRequestBody = deleteBodySchema.safeParse(await request.json());
+
+  if (!parsedRequestBody.success)
+    return Response.json("Bad Request", { status: 400 });
+
+  const dbResponse = await prisma.message.delete({
+    where: {
+      sender_id: userId,
+      id: parsedRequestBody.data.messageId,
+    },
+  });
+
+  if (dbResponse.id != parsedRequestBody.data.messageId) {
+    Response.json("Unauthorized", { status: 401 });
+  }
+
+  return Response.json(dbResponse);
+}
+
 export async function GET(request: NextRequest) {
   const userId = await auth(cookies().get("Authentication")?.value);
 
@@ -38,6 +66,7 @@ export async function GET(request: NextRequest) {
         message: true,
         receiver_id: true,
         created_at: true,
+        id: true,
       },
       orderBy: {
         created_at: "desc",
